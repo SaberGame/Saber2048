@@ -40,6 +40,8 @@
     skView.showsDrawCount = YES;
     _gameScene = [SLGameScene sceneWithSize:skView.bounds.size];
     _gameScene.scaleMode = SKSceneScaleModeAspectFill;
+    [_gameScene startNewGame];
+    _gameScene.controller = self;
     [skView presentScene:_gameScene];
     self.view = skView;
     
@@ -109,7 +111,7 @@
         make.right.equalTo(weakself.targetScoreLabel.mas_right);
     }];
     
-    
+    [self updateScore:0];
 }
 
 - (void)updateState {
@@ -131,6 +133,17 @@
     _subTitleLabel.text = [NSString stringWithFormat:@"Join the numbers \nto get to %zd!", 2048];
 }
 
+- (void)updateScore:(NSInteger)score
+{
+    _currentScoreView.socreLabel.text = [NSString stringWithFormat:@"%ld", (long)score];
+    if ([Settings integerForKey:@"Best Score"] < score) {
+        [Settings setInteger:score forKey:@"Best Score"];
+        _bestScoreView.socreLabel.text = [NSString stringWithFormat:@"%ld", (long)score];
+    }
+}
 
+- (void)endGame:(BOOL)won {
+    
+}
 
 @end

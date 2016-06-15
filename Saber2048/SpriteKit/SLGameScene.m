@@ -7,6 +7,8 @@
 //
 
 #import "SLGameScene.h"
+#import "SLGameManager.h"
+#import "SLGridView.h"
 
 // The min distance in one direction for an effective swipe.
 #define EFFECTIVE_SWIPE_DISTANCE_THRESHOLD 20.0f
@@ -18,10 +20,19 @@
 @interface SLGameScene()
 
 @property (nonatomic, assign) BOOL hasPendingSwipe;
+@property (nonatomic, strong) SLGameManager *gameManager;
+@property (nonatomic, strong) SKSpriteNode *board;
 
 @end
 
 @implementation SLGameScene
+
+- (instancetype)initWithSize:(CGSize)size {
+    if (self = [super initWithSize:size]) {
+        _gameManager = [[SLGameManager alloc] init];
+    }
+    return self;
+}
 
 - (void)didMoveToView:(SKView *)view {
     if (view == self.view) {
@@ -57,15 +68,31 @@
     if (absX > absY * VALID_SWIPE_DIRECTION_THRESHOLD) {
         
         translation.x < 0 ? NSLog(@"Left") : NSLog(@"Right");
-//        translation.x < 0 ? [_manager moveToDirection:M2DirectionLeft] :
-//        [_manager moveToDirection:M2DirectionRight];
+        translation.x < 0 ? [_gameManager moveToDirection:SLDirectionLeft] :
+        [_gameManager moveToDirection:SLDirectionRight];
     } else if (absY > absX * VALID_SWIPE_DIRECTION_THRESHOLD) {
         translation.y < 0 ? NSLog(@"Up") : NSLog(@"Down");
-//        translation.y < 0 ? [_manager moveToDirection:M2DirectionUp] :
-//        [_manager moveToDirection:M2DirectionDown];
+        translation.y < 0 ? [_gameManager moveToDirection:SLDirectionUp] :
+        [_gameManager moveToDirection:SLDirectionDown];
     }
     
     _hasPendingSwipe = NO;
+}
+
+- (void)startNewGame {
+    [_gameManager startNewSessionWithScene:self];
+}
+
+- (void)loadBoardWithGrid:(SLGrid *)grid {
+    if (_board) {
+        [_board removeFromParent];
+    }
+    UIImage *image = [SLGridView gridImageWithGrid:grid];
+    SKTexture *backgroundTexture = [SKTexture textureWithCGImage:image.CGImage];
+    _board = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
+    [_board setScale:1/[UIScreen mainScreen].scale];
+    _board.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    [self addChild:_board];
 }
 
 @end

@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
+@class SLGrid;
+@class SLMainViewController;
 
 @interface SLGameScene : SKScene
+
+@property (nonatomic, weak) SLMainViewController *controller;
+
+- (void)startNewGame;
+
+- (void)loadBoardWithGrid:(SLGrid *)grid;
 
 @end

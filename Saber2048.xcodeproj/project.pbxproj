@@ -10,6 +10,11 @@
 		3B196F451D110C3B00FA375D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B196F441D110C3B00FA375D /* Info.plist */; };
 		3B196F4C1D110DA400FA375D /* SLScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B196F4B1D110DA400FA375D /* SLScoreView.m */; };
 		3B196F501D111D5300FA375D /* SLGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B196F4F1D111D5300FA375D /* SLGameScene.m */; };
+		3B196F541D11270F00FA375D /* SLGameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B196F531D11270F00FA375D /* SLGameManager.m */; };
+		3B196F571D112C2100FA375D /* SLGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B196F561D112C2100FA375D /* SLGrid.m */; };
+		3B196F5A1D112E7300FA375D /* SLCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B196F591D112E7300FA375D /* SLCell.m */; };
+		3B196F5D1D112E8800FA375D /* SLTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B196F5C1D112E8800FA375D /* SLTile.m */; };
+		3B196F611D11334A00FA375D /* SLGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B196F601D11334A00FA375D /* SLGridView.m */; };
 		3B81F12F1D10F8DE000FB8C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B81F12E1D10F8DE000FB8C0 /* main.m */; };
 		3B81F1321D10F8DE000FB8C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B81F1311D10F8DE000FB8C0 /* AppDelegate.m */; };
 		3B81F13A1D10F8DE000FB8C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B81F1391D10F8DE000FB8C0 /* Assets.xcassets */; };
@@ -36,6 +41,17 @@
 		3B196F4B1D110DA400FA375D /* SLScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLScoreView.m; sourceTree = "<group>"; };
 		3B196F4E1D111D5300FA375D /* SLGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLGameScene.h; sourceTree = "<group>"; };
 		3B196F4F1D111D5300FA375D /* SLGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLGameScene.m; sourceTree = "<group>"; };
+		3B196F521D11270F00FA375D /* SLGameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLGameManager.h; sourceTree = "<group>"; };
+		3B196F531D11270F00FA375D /* SLGameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLGameManager.m; sourceTree = "<group>"; };
+		3B196F551D112C2100FA375D /* SLGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLGrid.h; sourceTree = "<group>"; };
+		3B196F561D112C2100FA375D /* SLGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLGrid.m; sourceTree = "<group>"; };
+		3B196F581D112E7300FA375D /* SLCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCell.h; sourceTree = "<group>"; };
+		3B196F591D112E7300FA375D /* SLCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCell.m; sourceTree = "<group>"; };
+		3B196F5B1D112E8800FA375D /* SLTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLTile.h; sourceTree = "<group>"; };
+		3B196F5C1D112E8800FA375D /* SLTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLTile.m; sourceTree = "<group>"; };
+		3B196F5E1D112EDE00FA375D /* SLPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLPosition.h; sourceTree = "<group>"; };
+		3B196F5F1D11334A00FA375D /* SLGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLGridView.h; sourceTree = "<group>"; };
+		3B196F601D11334A00FA375D /* SLGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLGridView.m; sourceTree = "<group>"; };
 		3B81F12A1D10F8DE000FB8C0 /* Saber2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saber2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B81F12E1D10F8DE000FB8C0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3B81F1301D10F8DE000FB8C0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -93,6 +109,8 @@
 			children = (
 				3B196F4A1D110DA400FA375D /* SLScoreView.h */,
 				3B196F4B1D110DA400FA375D /* SLScoreView.m */,
+				3B196F5F1D11334A00FA375D /* SLGridView.h */,
+				3B196F601D11334A00FA375D /* SLGridView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -100,10 +118,25 @@
 		3B196F4D1D111D2200FA375D /* SpriteKit */ = {
 			isa = PBXGroup;
 			children = (
+				3B196F551D112C2100FA375D /* SLGrid.h */,
+				3B196F561D112C2100FA375D /* SLGrid.m */,
+				3B196F581D112E7300FA375D /* SLCell.h */,
+				3B196F591D112E7300FA375D /* SLCell.m */,
+				3B196F5B1D112E8800FA375D /* SLTile.h */,
+				3B196F5C1D112E8800FA375D /* SLTile.m */,
 				3B196F4E1D111D5300FA375D /* SLGameScene.h */,
 				3B196F4F1D111D5300FA375D /* SLGameScene.m */,
 			);
 			path = SpriteKit;
+			sourceTree = "<group>";
+		};
+		3B196F511D1126F800FA375D /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				3B196F521D11270F00FA375D /* SLGameManager.h */,
+				3B196F531D11270F00FA375D /* SLGameManager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		3B81F1211D10F8DE000FB8C0 = {
@@ -127,6 +160,7 @@
 			children = (
 				3B81F1301D10F8DE000FB8C0 /* AppDelegate.h */,
 				3B81F1311D10F8DE000FB8C0 /* AppDelegate.m */,
+				3B196F511D1126F800FA375D /* Manager */,
 				3B81F1491D10FB46000FB8C0 /* State */,
 				3B81F14D1D110143000FB8C0 /* Theme */,
 				3B81F1441D10F905000FB8C0 /* Controller */,
@@ -164,6 +198,7 @@
 			children = (
 				3B81F14A1D10FB62000FB8C0 /* SLGlobalState.h */,
 				3B81F14B1D10FB62000FB8C0 /* SLGlobalState.m */,
+				3B196F5E1D112EDE00FA375D /* SLPosition.h */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -285,12 +320,15 @@
 				3B81F1741D110AD7000FB8C0 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				3B81F1321D10F8DE000FB8C0 /* AppDelegate.m in Sources */,
 				3B81F1721D110AD7000FB8C0 /* MASViewConstraint.m in Sources */,
+				3B196F5D1D112E8800FA375D /* SLTile.m in Sources */,
 				3B81F12F1D10F8DE000FB8C0 /* main.m in Sources */,
 				3B81F1481D10FA0E000FB8C0 /* SLMainViewController.m in Sources */,
 				3B81F14C1D10FB62000FB8C0 /* SLGlobalState.m in Sources */,
+				3B196F541D11270F00FA375D /* SLGameManager.m in Sources */,
 				3B81F1751D110AD7000FB8C0 /* View+MASAdditions.m in Sources */,
 				3B81F16D1D110AD7000FB8C0 /* MASCompositeConstraint.m in Sources */,
 				3B81F1711D110AD7000FB8C0 /* MASViewAttribute.m in Sources */,
+				3B196F611D11334A00FA375D /* SLGridView.m in Sources */,
 				3B81F16F1D110AD7000FB8C0 /* MASConstraintMaker.m in Sources */,
 				3B81F1731D110AD7000FB8C0 /* NSArray+MASAdditions.m in Sources */,
 				3B81F1761D110AD7000FB8C0 /* ViewController+MASAdditions.m in Sources */,
@@ -298,6 +336,8 @@
 				3B81F1701D110AD7000FB8C0 /* MASLayoutConstraint.m in Sources */,
 				3B196F4C1D110DA400FA375D /* SLScoreView.m in Sources */,
 				3B81F1501D110157000FB8C0 /* SLTheme.m in Sources */,
+				3B196F571D112C2100FA375D /* SLGrid.m in Sources */,
+				3B196F5A1D112E7300FA375D /* SLCell.m in Sources */,
 				3B196F501D111D5300FA375D /* SLGameScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
