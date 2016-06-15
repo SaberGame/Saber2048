@@ -1,0 +1,14 @@
+//
+//  Saber2048-Prefix.pch
+//  Saber2048
+//
+//  Created by songlong on 16/6/15.
+//  Copyright © 2016年 SaberGame. All rights reserved.
+//
+
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "SLGlobalState.h"
+#endif
