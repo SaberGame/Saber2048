@@ -29,7 +29,8 @@ typedef NS_ENUM(NSInteger, SLGameType) {
 @property (nonatomic, assign, readonly) NSInteger cornerRadius;
 @property (nonatomic, assign, readonly) NSInteger winningLevel;
 @property (nonatomic, assign, readonly) SLGameType gameType;
-@property (nonatomic, assign) NSInteger theme;
+@property (nonatomic, assign, readonly) NSInteger theme;
+@property (nonatomic, assign) BOOL needRefresh;
 
 
 /** The singleton instance of state. */
@@ -120,5 +121,7 @@ typedef NS_ENUM(NSInteger, SLGameType) {
  * @return The y location in points, relative to the grid.
  */
 - (CGFloat)yLocationOfPosition:(SLPosition)position;
+
+- (void)loadGlobalState;
 
 @end

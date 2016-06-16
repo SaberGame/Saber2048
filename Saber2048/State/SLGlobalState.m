@@ -44,11 +44,29 @@
     _dimension = [Settings integerForKey:kBoardSize] + 3;
     _cornerRadius = 4;
     _borderWidth = 5;
+    _winningLevel = [self getWinningLevel];
     _animationDuration = 0.1;
     _theme = [Settings integerForKey:kTheme];
     _tileSize = _dimension <= 4 ? 66 : 56;
     _horizontalOffset = [self getHorizontalOffset];
     _verticalOffset = [self getVerticalOffset];
+    _needRefresh = NO;
+}
+
+- (NSInteger)getWinningLevel {
+    if (_gameType == SLGameType3) {
+        switch (self.dimension) {
+            case 3: return 4;
+            case 4: return 5;
+            case 5: return 6;
+            default: return 5;
+        }
+    }
+    
+    NSInteger level = 11;
+    if (self.dimension == 3) return level - 1;
+    if (self.dimension == 5) return level + 2;
+    return level;
 }
 
 - (NSInteger)getHorizontalOffset {

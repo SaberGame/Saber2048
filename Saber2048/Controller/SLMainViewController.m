@@ -10,6 +10,9 @@
 #import "SLScoreView.h"
 #import "Masonry.h"
 #import "SLGameScene.h"
+#import "SLOverlayView.h"
+#import "SLGridView.h"
+#import "SLSettingViewController.h"
 
 @interface SLMainViewController ()
 
@@ -20,6 +23,8 @@
 @property (nonatomic, strong) UIButton *restartButton;
 @property (nonatomic, strong) UIButton *settingButton;
 @property (nonatomic, strong) SLGameScene *gameScene;
+@property (nonatomic, strong) UIImageView *overlayBackground;
+@property (nonatomic, strong) SLOverlayView *overlay;
 
 @end
 
@@ -33,6 +38,10 @@
 }
 
 - (void)setupUI {
+    
+    _overlayBackground = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    _overlayBackground.hidden = YES;
+    [self.view addSubview:_overlayBackground];
     
     SKView * skView = [[SKView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     skView.showsFPS = YES;
@@ -77,6 +86,7 @@
     }];
     
     _restartButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_restartButton addTarget:self action:@selector(restart) forControlEvents:UIControlEventTouchUpInside];
     [_restartButton setTitle:@"Restart" forState:UIControlStateNormal];
     _restartButton.layer.cornerRadius = SLSTATE.cornerRadius;
     _restartButton.layer.masksToBounds = YES;
@@ -90,6 +100,7 @@
     }];
     
     _settingButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_settingButton addTarget:self action:@selector(clickSettingButton) forControlEvents:UIControlEventTouchUpInside];
     [_settingButton setTitle:@"Settings" forState:UIControlStateNormal];
     _settingButton.layer.cornerRadius = SLSTATE.cornerRadius;
     _settingButton.layer.masksToBounds = YES;
@@ -111,8 +122,15 @@
         make.right.equalTo(weakself.targetScoreLabel.mas_right);
     }];
     
+    _overlay = [[SLOverlayView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [_overlay.keepPlayingButton addTarget:self action:@selector(keepPlaying) forControlEvents:UIControlEventTouchUpInside];
+    [_overlay.restartGameButton addTarget:self action:@selector(restart) forControlEvents:UIControlEventTouchUpInside];
+    _overlay.hidden = YES;
+    [self.view addSubview:_overlay];
+    
     [self updateScore:0];
 }
+
 
 - (void)updateState {
     [_currentScoreView updateAppearance];
@@ -131,6 +149,14 @@
     _subTitleLabel.textColor = [SLSTATE buttonColor];
     _subTitleLabel.font = [UIFont fontWithName:[SLSTATE regularFontName] size:14];
     _subTitleLabel.text = [NSString stringWithFormat:@"Join the numbers \nto get to %zd!", 2048];
+
+    _overlay.messageLabel.textColor = [SLSTATE buttonColor];
+//    _overlay.messageLabel.text = @"You Won!";
+    _overlay.messageLabel.font = [UIFont fontWithName:[SLSTATE boldFontName] size:36];
+    _overlay.restartGameButton.titleLabel.font = [UIFont fontWithName:[SLSTATE boldFontName] size:17];
+    [_overlay.restartGameButton setTitleColor:[SLSTATE buttonColor] forState:UIControlStateNormal];
+    _overlay.keepPlayingButton.titleLabel.font = [UIFont fontWithName:[SLSTATE boldFontName] size:17];
+    [_overlay.keepPlayingButton setTitleColor:[SLSTATE buttonColor] forState:UIControlStateNormal];
 }
 
 - (void)updateScore:(NSInteger)score
@@ -143,7 +169,68 @@
 }
 
 - (void)endGame:(BOOL)won {
+    _overlay.hidden = NO;
+    _overlay.alpha = 0;
+    _overlayBackground.hidden = NO;
+    _overlayBackground.alpha = 0;
     
+    if (!won) {
+        _overlay.keepPlayingButton.hidden = YES;
+        _overlay.messageLabel.text = @"Game Over";
+    } else {
+        _overlay.keepPlayingButton.hidden = NO;
+        _overlay.messageLabel.text = @"You Win!";
+    }
+    
+    // Fake the overlay background as a mask on the board.
+    _overlayBackground.image = [SLGridView gridImageWithOverlay];
+    
+    [UIView animateWithDuration:0.5 delay:1.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        _overlay.alpha = 1;
+        _overlayBackground.alpha = 1;
+    } completion:^(BOOL finished) {
+        // Freeze the current game.
+        ((SKView *)self.view).paused = YES;
+    }];
+}
+
+- (void)hideOverlay {
+    ((SKView *)self.view).paused = NO;
+    if (!_overlay.hidden) {
+        [UIView animateWithDuration:0.5 animations:^{
+            _overlay.alpha = 0;
+            _overlayBackground.alpha = 0;
+        } completion:^(BOOL finished) {
+            _overlay.hidden = YES;
+            _overlayBackground.hidden = YES;
+        }];
+    }
+}
+
+- (void)keepPlaying {
+    [self hideOverlay];
+}
+
+- (void)restart {
+    [self hideOverlay];
+    [self updateScore:0];
+    [_gameScene startNewGame];
+}
+
+- (void)clickSettingButton {
+    __weak typeof(self) weakself = self;
+    SLSettingViewController *vc =[[SLSettingViewController alloc] init];
+    vc.clickBlock = ^{
+        ((SKView *)weakself.view).paused = NO;
+        if (SLSTATE.needRefresh) {
+            [SLSTATE loadGlobalState];
+            [weakself updateState];
+            [weakself updateScore:0];
+            [weakself.gameScene startNewGame];
+        }
+    };
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

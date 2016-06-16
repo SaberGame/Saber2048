@@ -65,4 +65,16 @@
     return image;
 }
 
++ (UIImage *)gridImageWithOverlay {
+    UIView *backgroundView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    backgroundView.backgroundColor = [UIColor clearColor];
+    backgroundView.opaque = NO;
+    
+    SLGridView *view = [[SLGridView alloc] init];
+    view.backgroundColor = [[SLSTATE backgroundColor] colorWithAlphaComponent:0.8];
+    [backgroundView addSubview:view];
+    
+    return [SLGridView snapshotWithView:backgroundView];
+}
+
 @end

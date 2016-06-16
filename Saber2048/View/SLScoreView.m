@@ -24,7 +24,7 @@
         
         _socreLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _socreLabel.textColor = [UIColor whiteColor];
-        _socreLabel.text = @"000";
+        _socreLabel.text = @"0";
         [self addSubview:_socreLabel];
         [_socreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(0);
